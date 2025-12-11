@@ -14,7 +14,7 @@ exports.config = {
 exports.init = async api => ({
     async middleware(ctx) {
         if (ctx.path === '/~/api/get_file_details') {
-			var array = api.getConfig('allowedusers');
+            var array = api.getConfig('allowedusers');
             if (array && api.ctxBelongsTo(ctx, array)) return;
             return () => {
                 if (ctx.body && ctx.body.details) {
@@ -26,5 +26,6 @@ exports.init = async api => ({
         }
     }
 });
+
 
 

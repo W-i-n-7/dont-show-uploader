@@ -1,4 +1,4 @@
-exports.version = 1.0
+exports.version = 1.1
 exports.apiRequired = 10.3 // api.ctxBelongsTo
 exports.description = "Only show file uploader information to allowed users (or no one)"
 exports.repo = "W-i-n-7/dont-show-uploader"
@@ -17,15 +17,8 @@ exports.init = async api => ({
             var array = api.getConfig('allowedusers');
             if (array && api.ctxBelongsTo(ctx, array)) return;
             return () => {
-                if (ctx.body && ctx.body.details) {
-                    for (const det of ctx.body.details) {
-                        delete det.upload;
-                    }
-                }
+                ctx?.body?.details?.forEach(det => det && delete det.upload);
             };
         }
     }
 });
-
-
-
